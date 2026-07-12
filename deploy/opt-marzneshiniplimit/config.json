@@ -1,0 +1,64 @@
+{
+    "GENERAL_LIMIT": 1,
+    "BOT_TOKEN": "8780552176:AAGYPLlJiUIyW62PXqEdjt3-zw-IkJXeWEs",
+    "ADMINS": [
+        6863137412
+    ],
+    "EXCEPT_USERS": [],
+    "PANEL_USERNAME": "valtor",
+    "PANEL_PASSWORD": "6978",
+    "PANEL_DOMAIN": "127.0.0.1:18000",
+    "SECRET_KEY": "noranx-restore-ip-limiter-secret-2026",
+    "API_USERNAME": "api",
+    "API_PASSWORD": "noranx-api-secret",
+    "CHECK_INTERVAL": 30,
+    "TIME_TO_ACTIVE_USERS": 2400,
+    "SPECIAL_LIMIT": [
+        [
+            "tg6863137412_vedy2hr8",
+            1
+        ],
+        [
+            "tg1020909704_6q3vz6el",
+            1
+        ],
+        [
+            "ttg8723285380_3elyagkb",
+            1
+        ],
+        [
+            "ttg6465390087_49p9l31r",
+            1
+        ],
+        [
+            "ttg76128340_e0fgvcni",
+            1
+        ],
+        [
+            "ttg8122415866_st5bdojo",
+            1
+        ],
+        [
+            "test_account_noranx",
+            1
+        ],
+        [
+            "test",
+            1
+        ],
+        [
+            "test_hc_84169",
+            2
+        ],
+        [
+            "ttg5888320549_0fjiylvl",
+            1
+        ],
+        [
+            "ttg1187525496_5ki8vcxq",
+            1
+        ]
+    ],
+    "outOfLimitNumber": 2,
+    "IP_LOCATION": "IR"
+}

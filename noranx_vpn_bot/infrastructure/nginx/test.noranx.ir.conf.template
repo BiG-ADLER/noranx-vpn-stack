@@ -1,0 +1,214 @@
+# test.ibaxgames.ir — Cloudflare CDN → VLESS/Trojan/VMESS WS
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name test.ibaxgames.ir;
+
+    root /var/www/test.ibaxgames.ir;
+
+    set $forwarded_proto $http_x_forwarded_proto;
+    if ($forwarded_proto = '') {
+        set $forwarded_proto $scheme;
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/test.ibaxgames.ir;
+        try_files $uri =404;
+    }
+
+    location /ws {
+        proxy_pass http://127.0.0.1:10000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        add_header Cache-Control "no-store, no-cache" always;
+    }
+
+    location /trojan {
+        proxy_pass http://127.0.0.1:10002;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        add_header Cache-Control "no-store, no-cache" always;
+    }
+
+    location /vmess {
+        proxy_pass http://127.0.0.1:10003;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        add_header Cache-Control "no-store, no-cache" always;
+    }
+
+    location / {
+        return 404;
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name test.ibaxgames.ir;
+
+    ssl_certificate     /etc/letsencrypt/live/test.ibaxgames.ir/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/test.ibaxgames.ir/privkey.pem;
+    ssl_protocols       TLSv1.2 TLSv1.3;
+
+    root /var/www/test.ibaxgames.ir;
+
+    set $forwarded_proto $http_x_forwarded_proto;
+    if ($forwarded_proto = '') {
+        set $forwarded_proto $scheme;
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/test.ibaxgames.ir;
+        try_files $uri =404;
+    }
+
+    location /ws {
+        proxy_pass http://127.0.0.1:10000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        add_header Cache-Control "no-store, no-cache" always;
+    }
+
+    location /trojan {
+        proxy_pass http://127.0.0.1:10002;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        add_header Cache-Control "no-store, no-cache" always;
+    }
+
+    location /vmess {
+        proxy_pass http://127.0.0.1:10003;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        add_header Cache-Control "no-store, no-cache" always;
+    }
+
+    location / {
+        return 404;
+    }
+}
+
+server {
+    listen 8000 ssl http2;
+    listen [::]:8000 ssl http2;
+    server_name test.ibaxgames.ir;
+
+    ssl_certificate     /etc/letsencrypt/live/test.ibaxgames.ir/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/test.ibaxgames.ir/privkey.pem;
+    ssl_protocols       TLSv1.2 TLSv1.3;
+
+    root /var/www/test.ibaxgames.ir;
+
+    set $forwarded_proto $http_x_forwarded_proto;
+    if ($forwarded_proto = '') {
+        set $forwarded_proto $scheme;
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/test.ibaxgames.ir;
+        try_files $uri =404;
+    }
+
+    location /ws {
+        proxy_pass http://127.0.0.1:10000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        add_header Cache-Control "no-store, no-cache" always;
+    }
+
+    location /trojan {
+        proxy_pass http://127.0.0.1:10002;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        add_header Cache-Control "no-store, no-cache" always;
+    }
+
+    location /vmess {
+        proxy_pass http://127.0.0.1:10003;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Proto $forwarded_proto;
+        proxy_read_timeout 86400s;
+        proxy_send_timeout 86400s;
+        add_header Cache-Control "no-store, no-cache" always;
+    }
+
+    location / {
+        return 404;
+    }
+}

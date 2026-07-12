@@ -1,0 +1,19 @@
+services:
+  marzban-device-limit:
+    build:
+      context: .
+      dockerfile: Dockerfile.release
+    image: marzban-device-limit:release
+    container_name: marzban-device-limit
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    environment:
+      - MARZBAN_URL=${MARZBAN_URL:-http://127.0.0.1:8000}
+      - PORT=${PORT:-3000}
+      - DATA_DIR=${DATA_DIR:-/data}
+    volumes:
+      - ./data:/data
+    network_mode: host
+    env_file:
+      - .env

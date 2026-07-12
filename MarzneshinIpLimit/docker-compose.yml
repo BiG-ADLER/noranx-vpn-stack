@@ -1,0 +1,15 @@
+services:
+  marzneshin_ip_limit:
+    image: ghcr.io/muttehitler/marzneshiniplimit:latest
+    restart: always
+    environment:
+      PORT: 6284
+    network_mode: host
+    volumes:
+      - /opt/marzneshiniplimit/config.json:/marzneshiniplimitcode/config.json
+      - /opt/marzneshiniplimit/app.log:/marzneshiniplimitcode/app.log
+    healthcheck:
+      test: ["CMD", "python", "/marzneshiniplimitcode/health_check.py"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

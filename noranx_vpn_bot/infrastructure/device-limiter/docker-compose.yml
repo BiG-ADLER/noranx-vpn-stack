@@ -1,0 +1,19 @@
+services:
+  device-limiter:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    image: noranx-device-limiter:local
+    container_name: noranx-device-limiter
+    restart: always
+    network_mode: host
+    env_file: .env
+    environment:
+      MARZBAN_URL: ${MARZBAN_URL:-https://127.0.0.1:18000}
+      PORT: "3000"
+      DATA_DIR: /data
+    volumes:
+      - device_limiter_data:/data
+
+volumes:
+  device_limiter_data:

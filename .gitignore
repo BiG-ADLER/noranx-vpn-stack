@@ -1,0 +1,31 @@
+# Python / tooling (keep .env — included intentionally for full stack backup)
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+
+# Logs and runtime artifacts
+logs/
+*.log
+
+# Archives / large backups
+*.tar.gz
+*.tar.xz
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Go build artifacts (device-limiter source)
+**/device-limit
+**/*.test
+**/*.out
+
+# Docker runtime data
+**/data/*.db
+**/data/*.db-*

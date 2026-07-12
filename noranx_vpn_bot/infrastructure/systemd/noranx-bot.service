@@ -1,0 +1,18 @@
+[Unit]
+Description=NoranX VPN Telegram Bot
+After=network-online.target docker.service
+Wants=network-online.target docker.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/noranx_vpn_bot
+EnvironmentFile=/root/noranx_vpn_bot/.env
+ExecStartPre=/root/noranx_vpn_bot/.venv/bin/alembic upgrade head
+ExecStartPre=/bin/bash /root/noranx_vpn_bot/scripts/wait_for_deps.sh
+ExecStart=/root/noranx_vpn_bot/.venv/bin/python -m bot.main
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

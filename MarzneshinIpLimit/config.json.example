@@ -1,0 +1,17 @@
+{
+    "GENERAL_LIMIT":1,
+    "BOT_TOKEN": "BotToken",
+    "ADMINS":[112234455],
+    "EXCEPT_USERS": [],
+    "PANEL_USERNAME": "username",
+    "PANEL_PASSWORD": "pass",
+    "PANEL_DOMAIN": "address:port",
+    "SECRET_KEY": "supersecretkey",
+    "API_USERNAME": "username",
+    "API_PASSWORD": "password",
+    "CHECK_INTERVAL": 30,
+    "TIME_TO_ACTIVE_USERS": 2400,
+    "SPECIAL_LIMIT": [],
+    "outOfLimitNumber": 3,
+    "IP_LOCATION":"IR"
+}

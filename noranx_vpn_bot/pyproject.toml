@@ -1,0 +1,31 @@
+[project]
+name = "noranx-vpn-bot"
+version = "0.1.0"
+description = "Telegram sales bot for Marzban VPN"
+requires-python = ">=3.11"
+dependencies = [
+    "aiogram>=3.13.0",
+    "sqlalchemy[asyncio]>=2.0.36",
+    "asyncpg>=0.30.0",
+    "alembic>=1.14.0",
+    "httpx>=0.28.0",
+    "pydantic-settings>=2.6.0",
+    "redis>=5.2.0",
+    "apscheduler>=3.10.4",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "qrcode[pil]>=8.0",
+    "python-multipart>=0.0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24"]
+ocr = ["pytesseract>=0.3.10", "Pillow>=10.0"]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["bot*", "webhooks*"]

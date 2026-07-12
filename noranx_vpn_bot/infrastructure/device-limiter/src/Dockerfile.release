@@ -1,0 +1,17 @@
+# Release Stage Only
+FROM alpine:latest
+
+WORKDIR /app
+
+# Install dependencies for timezone and SSL
+RUN apk add --no-cache tzdata ca-certificates
+
+# Copy binary directly from host (uploaded via SCP)
+COPY device-limit .
+
+# Ensure executable
+RUN chmod +x device-limit
+
+EXPOSE 3000
+
+CMD ["./device-limit"]
